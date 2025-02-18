@@ -3,7 +3,7 @@ CC = gcc
 
 BINARY = mandelbrot
 
-CFILES = mandelbrot.c
+CFILES = mandelbrot.c fractol.c
 OBJECTS = $(CFILES:%.c=%.o)
 
 all: $(BINARY)
