@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/02/18 16:55:54 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:32:51 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	square_complex(t_complex *z)
 	temp = z->re;
 	z->re = (z->re * z->re) - (z->im * z->im);
 	z->im = 2 * (z->im * temp);
-	// return (*z);
 }
 
 void	handle_pixel(t_fractol *data, int x, int y)
@@ -70,16 +69,16 @@ void	handle_pixel(t_fractol *data, int x, int y)
 	int			i;
 	int			colour;
 
-	z.re = 0.0;
-	z.im = 0.0;
 	c.re = scale(x, -2 , 2, WIDTH);
 	c.im = scale(y, 2 , -2, HEIGHT);
+	z.re = c.re;
+	z.im = c.im;
 	i = 0;
-	while (i < 24)
+	while (i < ITERATIONS)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			colour = 0x0000FF + (i * (0xFFFFFF / 24));
+			colour = 0x035067 + (i * (0xFFFFFF / ITERATIONS));
 			pixel_put(x, y, &data->img, colour);
 			return ;
 		}
