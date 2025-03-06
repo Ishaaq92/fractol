@@ -6,11 +6,30 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:25:42 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/06 14:23:50 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/06 17:08:52 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+double	ft_atod(const char *nptr)
+{
+	int	i;
+	int	sign;
+	double	total;
+
+	i = 0;
+	sign = 1;
+	total = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
+		i ++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+		if (nptr[i++] == '-')
+			sign = sign * -1;
+	while (nptr[i] >= 48 && nptr[i] <= 57)
+		total = (total * 10) + (nptr[i++] - 48);
+	return (sign * total);
+}
 
 static void	julia(t_fractol *data, int x, int y)
 {
@@ -77,6 +96,10 @@ int	input_julia(int keysym, t_fractol *data)
 
 int	scroll_julia(int keysym, int x, int y, t_fractol *data)
 {
+
+	(void) x;
+	(void) y;
+
 	if (!data)
 		return (1);
 	if (keysym == 4)

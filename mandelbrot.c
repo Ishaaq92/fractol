@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:34:20 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/06 14:24:52 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/06 17:10:16 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int	input_mandelbrot(int keysym, t_fractol *data)
 
 int	scroll_mandelbrot(int keysym, int x, int y, t_fractol *data)
 {
+	(void) x;
+	(void) y;
+
 	if (!data)
 		return (1);
 	if (keysym == 4)
