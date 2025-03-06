@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 16:34:20 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/06 14:24:52 by isahmed          ###   ########.fr       */
+/*   Created: 2025/03/05 14:25:42 by isahmed           #+#    #+#             */
+/*   Updated: 2025/03/06 14:23:50 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	mandelbrot(t_fractol *data, int x, int y)
+static void	julia(t_fractol *data, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
 	int			i;
 	int			colour;
 
-	c.re = scale(x, -2 , 2, WIDTH) * data->zoom + data->x_shift;
-	c.im = scale(y, 2 , -2, HEIGHT) * data->zoom + data->y_shift;
-	z.re = 0;
-	z.im = 0;
+	z.re = scale(x, -2 , 2, WIDTH) * data->zoom + data->x_shift;
+	z.im = scale(y, 2 , -2, HEIGHT) * data->zoom + data->y_shift;
+	c.re = -0.8;
+	c.im = 0.156;
 	i = 0;
 	while (i < ITERATIONS)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			colour = 0x034056 + (i * (0xFFFFFF / ITERATIONS));
+			colour = scale(i, 0, 0xfffff, ITERATIONS);
 			pixel_put(x, y, &data->img, colour);
 			return ;
 		}
@@ -40,7 +40,7 @@ static void	mandelbrot(t_fractol *data, int x, int y)
 	pixel_put(x, y, &data->img, 0xffffff);
 }
 
-void	render_mandelbrot(t_fractol *data)
+void	render_julia(t_fractol *data)
 {
 	int	x;
 	int	y;
@@ -51,7 +51,7 @@ void	render_mandelbrot(t_fractol *data)
 		x = 0;
 		while (x < WIDTH)
 		{
-			mandelbrot(data, x, y);
+			julia(data, x, y);
 			x ++;
 		}
 		y ++;
@@ -59,7 +59,7 @@ void	render_mandelbrot(t_fractol *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 }
 
-int	input_mandelbrot(int keysym, t_fractol *data)
+int	input_julia(int keysym, t_fractol *data)
 {
 	if (keysym == XK_Escape)
 		ft_quit(data);
@@ -71,11 +71,11 @@ int	input_mandelbrot(int keysym, t_fractol *data)
 		data->y_shift += (data->zoom/2 * 0.35);
 	else if (keysym == XK_s || keysym == XK_Down)
 		data->y_shift -= (data->zoom/2 * 0.35);
-	render_mandelbrot(data);
-	return (1);
+	render_julia(data);
+	return (0);
 }
 
-int	scroll_mandelbrot(int keysym, int x, int y, t_fractol *data)
+int	scroll_julia(int keysym, int x, int y, t_fractol *data)
 {
 	if (!data)
 		return (1);
@@ -83,7 +83,6 @@ int	scroll_mandelbrot(int keysym, int x, int y, t_fractol *data)
 		data->zoom *= 0.9;
 	if (keysym == 5)
 		data->zoom /= 0.9;
-	render_mandelbrot(data);
+	render_julia(data);
 	return (0);
 }
-

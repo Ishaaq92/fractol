@@ -6,16 +6,11 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/02/26 18:32:51 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:28:09 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-double	scale(double unscaled_num, double new_min, double new_max, double old_max)
-{
-	return (new_max - new_min) * (unscaled_num - 0) / (old_max - 0) + new_min;
-}
 
 void    fractol_init(t_fractol *data)
 {
@@ -40,71 +35,43 @@ void    fractol_init(t_fractol *data)
 	data->img.pxls = mlx_get_data_addr(data->img.img, &data->img.bpp, 
 								&data->img.line_length,
 								&data->img.endian);
+	data->zoom = 1.0;
+	data->x_shift = 0.0;
+	data->y_shift = 0.0;
 }
 
 void	pixel_put(int x, int y, t_img *img, int colour)
 {
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT) // Ensure pixel is within bounds
-	{
-		char	*pixel;
+	char	*pixel;
 
+	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	{
 		pixel = img->pxls + (y * img->line_length + x * (img->bpp / 8));
 		*(unsigned int *)pixel = colour;
 	}
 }
 
-void	square_complex(t_complex *z)
+int	main(int ac, char *av[])
 {
-	double	temp;
+	t_fractol	data;
 
-	temp = z->re;
-	z->re = (z->re * z->re) - (z->im * z->im);
-	z->im = 2 * (z->im * temp);
-}
-
-void	handle_pixel(t_fractol *data, int x, int y)
-{
-	t_complex	z;
-	t_complex	c;
-	int			i;
-	int			colour;
-
-	c.re = scale(x, -2 , 2, WIDTH);
-	c.im = scale(y, 2 , -2, HEIGHT);
-	z.re = c.re;
-	z.im = c.im;
-	i = 0;
-	while (i < ITERATIONS)
+	if (!ft_strncmp(av[1], "mandelbrot", 10) && ac == 2)
+		if (!ft_strncmp(av[1], "julia", 5))
+			return (1);
+	fractol_init(&data);
+	if (av[1][0] == 'm')
 	{
-		if ((z.re * z.re) + (z.im * z.im) > 4)
-		{
-			colour = 0x035067 + (i * (0xFFFFFF / ITERATIONS));
-			pixel_put(x, y, &data->img, colour);
-			return ;
-		}
-		square_complex(&z);
-		z.re = z.re + c.re;
-		z.im = z.im + c.im;
-		i ++;
+		render_mandelbrot(&data);
+		mlx_mouse_hook(data.win, scroll_mandelbrot, &data);
+		mlx_hook(data.win, KeyPress, KeyPressMask, input_mandelbrot, &data);
 	}
-	pixel_put(x, y, &data->img, BLACK);
-}
-
-void	render(t_fractol *data)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
+	else
 	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			handle_pixel(data, x, y);
-			x ++;
-		}
-		y ++;
+		render_julia(&data);
+		mlx_mouse_hook(data.win, scroll_julia, &data);
+		mlx_hook(data.win, KeyPress, KeyPressMask, input_julia, &data);
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+
+	mlx_hook(data.win, 17, KeyPressMask, destrory, &data);
+	mlx_loop(data.mlx);
 }
