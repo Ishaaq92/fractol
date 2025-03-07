@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/06 14:25:27 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:31:14 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ void	ft_quit(t_fractol *data);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		destrory(t_fractol *data);
 void	square_complex(t_complex *z);
+
+// utils2.c
+double	ft_atod(const char *nptr);
 
 // fractol.c
 void    fractol_init(t_fractol *data);
