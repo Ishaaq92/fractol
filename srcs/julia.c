@@ -6,57 +6,35 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:25:42 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/06 17:08:52 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 14:14:24 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	ft_atod(const char *nptr)
-{
-	int	i;
-	int	sign;
-	double	total;
-
-	i = 0;
-	sign = 1;
-	total = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
-		i ++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-		if (nptr[i++] == '-')
-			sign = sign * -1;
-	while (nptr[i] >= 48 && nptr[i] <= 57)
-		total = (total * 10) + (nptr[i++] - 48);
-	return (sign * total);
-}
-
 static void	julia(t_fractol *data, int x, int y)
 {
 	t_complex	z;
-	t_complex	c;
 	int			i;
 	int			colour;
 
 	z.re = scale(x, -2 , 2, WIDTH) * data->zoom + data->x_shift;
 	z.im = scale(y, 2 , -2, HEIGHT) * data->zoom + data->y_shift;
-	c.re = -0.8;
-	c.im = 0.156;
 	i = 0;
 	while (i < ITERATIONS)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			colour = scale(i, 0, 0xfffff, ITERATIONS);
-			pixel_put(x, y, &data->img, colour);
+			colour = scale(i, 0, PSY_MAGENTA, ITERATIONS);
+			pixel_put(x, y, data->img, colour);
 			return ;
 		}
 		square_complex(&z);
-		z.re = z.re + c.re;
-		z.im = z.im + c.im;
+		z.re = z.re + (*data->c).re;
+		z.im = z.im + (*data->c).im;
 		i ++;
 	}
-	pixel_put(x, y, &data->img, 0xffffff);
+	pixel_put(x, y, data->img, PSY_PURPLE);
 }
 
 void	render_julia(t_fractol *data)
@@ -75,7 +53,7 @@ void	render_julia(t_fractol *data)
 		}
 		y ++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
 
 int	input_julia(int keysym, t_fractol *data)
@@ -96,16 +74,25 @@ int	input_julia(int keysym, t_fractol *data)
 
 int	scroll_julia(int keysym, int x, int y, t_fractol *data)
 {
+	double	new_x;
+	double	new_y;
 
-	(void) x;
-	(void) y;
-
-	if (!data)
-		return (1);
+	new_x = scale(x, -1, 1, WIDTH - 1);
+	new_y = scale(y, 1, -1, HEIGHT - 1);
+	// printf("x -> %f\n", new_x);
+	// printf("y -> %f\n", new_y);
 	if (keysym == 4)
+	{
+		data->x_shift += (new_x * 0.35 * data->zoom / 2);
+		data->y_shift += (new_y * 0.35 * data->zoom / 2);
 		data->zoom *= 0.9;
+	}
 	if (keysym == 5)
+	{
+		data->x_shift -= (new_x * 0.35 * data->zoom / 2);
+		data->y_shift -= (new_y * 0.35 * data->zoom / 2);
 		data->zoom /= 0.9;
+	}
 	render_julia(data);
 	return (0);
 }

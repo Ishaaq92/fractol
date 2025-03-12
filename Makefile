@@ -6,7 +6,7 @@
 #    By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 16:42:19 by isahmed           #+#    #+#              #
-#    Updated: 2025/03/07 14:37:56 by isahmed          ###   ########.fr        #
+#    Updated: 2025/03/11 15:25:17 by isahmed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SDIR = srcs
 VPATH = $(SDIR)
 
 BINARY = fractol
-CFILES = mandelbrot.c julia.c fractol.c utils.c
+CFILES = mandelbrot.c julia.c fractol.c utils.c utils2.c
 #OBJECTS = $(CFILES:%.c=$(ODIR)/%.o)
 OBJS := $(patsubst %.c,$(ODIR)/%.o, $(CFILES))
 
@@ -37,10 +37,9 @@ $(ODIR)/%.o: %.c | $(DIRS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS)
+	rm -rf $(ODIR)
 
 fclean: clean
-	rm -rf *.o 
 	rm -rf $(BINARY)
 
 re: fclean all

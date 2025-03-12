@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:34:20 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/06 17:10:16 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:05 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	mandelbrot(t_fractol *data, int x, int y)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			colour = 0x034056 + (i * (0xFFFFFF / ITERATIONS));
-			pixel_put(x, y, &data->img, colour);
+			colour = PSY_BLACK + (i * (0xFFFFFF / ITERATIONS));
+			pixel_put(x, y, data->img, colour);
 			return ;
 		}
 		square_complex(&z);
@@ -37,7 +37,7 @@ static void	mandelbrot(t_fractol *data, int x, int y)
 		z.im = z.im + c.im;
 		i ++;
 	}
-	pixel_put(x, y, &data->img, 0xffffff);
+	pixel_put(x, y, data->img, PSY_GOLD);
 }
 
 void	render_mandelbrot(t_fractol *data)
@@ -56,7 +56,7 @@ void	render_mandelbrot(t_fractol *data)
 		}
 		y ++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
 
 int	input_mandelbrot(int keysym, t_fractol *data)
