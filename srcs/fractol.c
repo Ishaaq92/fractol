@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 15:36:55 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:19:15 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +37,30 @@ void	fractol_init(t_fractol *data)
 	data->c->im = 0;
 }
 
-void	pixel_put(int x, int y, t_img *img, int colour)
-{
-	char	*pixel;
-
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-	{
-		pixel = img->pxls + (y * img->line_length + x * (img->bpp / 8));
-		*(unsigned int *)pixel = colour;
-	}
-}
-
 int	main(int ac, char *av[])
 {
 	t_fractol	data;
-	t_complex	c;
 	t_img		img;
+	t_complex	c;
 
 	data.img = &img;
 	data.c = &c;
 	fractol_init(&data);
 	if (ft_strncmp(av[1], "mandelbrot", 10) == 0 && ac == 2)
 	{
-		render_mandelbrot(&data);
-		mlx_mouse_hook(data.win, scroll_mandelbrot, &data);
-		mlx_hook(data.win, KeyPress, KeyPressMask, input_mandelbrot, &data);
+		data.type = MANDELBROT;
 	}
 	else if (ft_strncmp(av[1], "julia", 5) == 0 &&  ac == 4)
 	{
+		data.type = JULIA;
 		c.re = ft_atod(av[2]);
 		c.im = ft_atod(av[3]);
-		render_julia(&data);
-		mlx_mouse_hook(data.win, scroll_julia, &data);
-		mlx_hook(data.win, KeyPress, KeyPressMask, input_julia, &data);
 	}
 	else
 		ft_quit(&data);
+	render(&data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, input, &data);
+	mlx_mouse_hook(data.win, scroll_with_cursor, &data);
 	mlx_hook(data.win, 17, KeyPressMask, destrory, &data);
 	mlx_loop(data.mlx);
 }

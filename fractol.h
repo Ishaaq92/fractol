@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 15:35:38 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:17:08 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # define PSY_WHITE      0xFFFFFF  // Pure White
 # define PSY_BLACK      0x000000  // Deep Black
 
+enum e_type
+{
+	MANDELBROT,
+	JULIA
+};
+
 typedef struct t_img
 {
 	void	*img;
@@ -57,11 +63,13 @@ typedef struct s_complex
 	double	im;
 }	t_complex;
 
+
 typedef struct s_fractol
 {
 	void		*mlx;
 	void		*win;
 	t_img		*img;
+	enum e_type	type;
 	t_complex	*c;
 	double		zoom;
 	double		x_shift;
@@ -69,28 +77,26 @@ typedef struct s_fractol
 }	t_fractol;
 
 // mandelbrot.c
-void	render_mandelbrot(t_fractol *data);
-int		input_mandelbrot(int keysym, t_fractol *data);
-int		scroll_mandelbrot(int keysym, int x, int y, t_fractol *data);
+void	render(t_fractol *data);
 
 // julia.c
-void	render_julia(t_fractol *data);
-int		input_julia(int keysym, t_fractol *data);
-int		scroll_julia(int keysym, int x, int y, t_fractol *data);
+int		input(int keysym, t_fractol *data);
+int		scroll_with_cursor(int keysym, int x, int y, t_fractol *data);
 
 // utils.c
 double	scale(double u, double new_min, double new_max, double old_max);
 void	ft_quit(t_fractol *data);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		destrory(t_fractol *data);
 void	square_complex(t_complex *z);
 
 // utils2.c
 double	ft_atod(const char *nptr);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // fractol.c
 void	fractol_init(t_fractol *data);
 int		input_mandelbrot(int keysym, t_fractol *data);
 void	pixel_put(int x, int y, t_img *img, int colour);
-
+void	julia(t_fractol *data, int x, int y);
+void	mandelbrot(t_fractol *data, int x, int y);
 #endif

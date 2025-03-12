@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:30:21 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/11 15:22:22 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:21:17 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,44 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	if (i < n)
 		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return (0);
+}
+
+int	scroll_with_cursor(int keysym, int x, int y, t_fractol *data)
+{
+	double	mouse_re;
+	double	mouse_im;
+
+	mouse_re = scale(x, -2, 2, WIDTH - 1) * data->zoom + data->x_shift;
+	mouse_im = scale(y, 2, -2, HEIGHT - 1) * data->zoom + data->y_shift;
+	if (keysym == 4)
+	{
+		data->x_shift = mouse_re + (data->x_shift - mouse_re) * 0.9;
+		data->y_shift = mouse_im + (data->y_shift - mouse_im) * 0.9;
+		data->zoom *= 0.9;
+	}
+	if (keysym == 5)
+	{
+		data->x_shift = mouse_re + (data->x_shift - mouse_re) / 0.9;
+		data->y_shift = mouse_im + (data->y_shift - mouse_im) / 0.9;
+		data->zoom /= 0.9;
+	}
+	render(data);
+	return (0);
+}
+
+int	input(int keysym, t_fractol *data)
+{
+	if (keysym == XK_Escape)
+		ft_quit(data);
+	else if (keysym == XK_a || keysym == XK_Left)
+		data->x_shift -= (data->zoom / 2 * 0.35);
+	else if (keysym == XK_d || keysym == XK_Right)
+		data->x_shift += (data->zoom / 2 * 0.35);
+	else if (keysym == XK_w || keysym == XK_Up)
+		data->y_shift += (data->zoom / 2 * 0.35);
+	else if (keysym == XK_s || keysym == XK_Down)
+		data->y_shift -= (data->zoom / 2 * 0.35);
+	render(data);
 	return (0);
 }

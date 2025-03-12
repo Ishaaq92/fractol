@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:19:35 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 15:32:14 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 16:18:05 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ int	destrory(t_fractol *data)
     return (0);
 }
 
+void	pixel_put(int x, int y, t_img *img, int colour)
+{
+	char	*pixel;
+
+	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	{
+		pixel = img->pxls + (y * img->line_length + x * (img->bpp / 8));
+		*(unsigned int *)pixel = colour;
+	}
+}
 
 void	square_complex(t_complex *z)
 {
