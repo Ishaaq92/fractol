@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:25:42 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 16:14:13 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 17:09:23 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,5 @@ void	julia(t_fractol *data, int x, int y)
 		i ++;
 	}
 	pixel_put(x, y, data->img, PSY_PURPLE);
-}
-
-void	render_julia(t_fractol *data)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			julia(data, x, y);
-			x ++;
-		}
-		y ++;
-	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
 

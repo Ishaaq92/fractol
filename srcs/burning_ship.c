@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 16:34:20 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 17:29:02 by isahmed          ###   ########.fr       */
+/*   Created: 2025/03/12 17:23:30 by isahmed           #+#    #+#             */
+/*   Updated: 2025/03/12 17:29:45 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
-void	mandelbrot(t_fractol *data, int x, int y)
+void	burning_ship(t_fractol *data, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
@@ -23,6 +23,10 @@ void	mandelbrot(t_fractol *data, int x, int y)
 	c.im = scale(y, 2 , -2, HEIGHT) * data->zoom + data->y_shift;
 	z.re = 0;
 	z.im = 0;
+	if (c.re < 0)
+		c.re = -c.re;
+	if (c.im < 0)
+		c.im = -c.im;
 	i = 0;
 	while (i < ITERATIONS)
 	{
@@ -38,28 +42,4 @@ void	mandelbrot(t_fractol *data, int x, int y)
 		i ++;
 	}
 	pixel_put(x, y, data->img, PSY_MAGENTA);
-}
-
-void	render(t_fractol *data)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			if (data->type == MANDELBROT)
-				mandelbrot(data, x, y);
-			else if (data->type == JULIA)
-				julia(data, x, y);
-			else
-				burning_ship(data, x, y);
-			x ++;
-		}
-		y ++;
-	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }

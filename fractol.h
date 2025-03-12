@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 16:17:08 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 17:28:10 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@
 enum e_type
 {
 	MANDELBROT,
-	JULIA
+	JULIA,
+	BURNING_SHIP
 };
 
 typedef struct t_img
@@ -77,11 +78,15 @@ typedef struct s_fractol
 }	t_fractol;
 
 // mandelbrot.c
+void	mandelbrot(t_fractol *data, int x, int y);
 void	render(t_fractol *data);
 
 // julia.c
 int		input(int keysym, t_fractol *data);
 int		scroll_with_cursor(int keysym, int x, int y, t_fractol *data);
+
+// burning_ship.c
+void	burning_ship(t_fractol *data, int x, int y);
 
 // utils.c
 double	scale(double u, double new_min, double new_max, double old_max);
@@ -95,8 +100,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // fractol.c
 void	fractol_init(t_fractol *data);
-int		input_mandelbrot(int keysym, t_fractol *data);
 void	pixel_put(int x, int y, t_img *img, int colour);
 void	julia(t_fractol *data, int x, int y);
-void	mandelbrot(t_fractol *data, int x, int y);
+
 #endif
