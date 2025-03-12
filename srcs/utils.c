@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:19:35 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 12:21:00 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/12 15:32:14 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ void	ft_quit(t_fractol *data)
 	exit(1);
 }
 
-double	scale_zoom(double unscaled_num, double old_min, double old_max, double new_min, double new_max)
+double	scale(double u, double new_min, double new_max, double old_max)
 {
-	return ((unscaled_num - old_min) * (new_max - new_min) / (old_max - old_min) + new_min);
+	return (new_max - new_min) * (u - 0) / (old_max - 0) + new_min;
 }
 
-double	scale(double unscaled_num, double new_min, double new_max, double old_max)
-{
-	return (new_max - new_min) * (unscaled_num - 0) / (old_max - 0) + new_min;
-}
 
 int	destrory(t_fractol *data)
 {
