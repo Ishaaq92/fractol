@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 17:28:10 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 11:39:56 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define ITERATIONS 200 
+# define ITERATIONS 75 
 
 # define PSY_RED        0xFF2079  // Vibrant Pinkish-Red
 # define PSY_ORANGE     0xFF7300  // Electric Orange

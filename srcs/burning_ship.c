@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:23:30 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 17:29:45 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 12:28:00 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,24 @@ void	burning_ship(t_fractol *data, int x, int y)
 	int			i;
 	int			colour;
 
-	c.re = scale(x, -2 , 2, WIDTH) * data->zoom + data->x_shift;
-	c.im = scale(y, 2 , -2, HEIGHT) * data->zoom + data->y_shift;
+	c.re = scale(x, -2, 2, WIDTH) * data->zoom + data->x_shift;
+	c.im = scale(y, -2, 2, HEIGHT) * data->zoom - data->y_shift;
 	z.re = 0;
 	z.im = 0;
-	if (c.re < 0)
-		c.re = -c.re;
-	if (c.im < 0)
-		c.im = -c.im;
-	i = 0;
-	while (i < ITERATIONS)
+	i = -1;
+	while (++i < ITERATIONS)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			colour = PSY_INDIGO + (i * (0xFFFFFF / ITERATIONS));
-			pixel_put(x, y, data->img, colour);
+			colour = (i + 1 - log2(log2(fabs(z.re * z.re + z.im * z.im))));
+			pixel_put(x, y, data->img, 0x000000 + colour * (0x999999 / ITERATIONS));
 			return ;
 		}
+		z.re = fabs(z.re);
+		z.im = fabs(z.im);
 		square_complex(&z);
-		z.re = z.re + c.re;
-		z.im = z.im + c.im;
-		i ++;
+		z.re += c.re;
+		z.im += c.im;
 	}
-	pixel_put(x, y, data->img, PSY_MAGENTA);
+	pixel_put(x, y, data->img, PSY_BLACK);
 }
