@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:34:20 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 17:29:02 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 12:38:21 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	mandelbrot(t_fractol *data, int x, int y)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			colour = PSY_INDIGO + (i * (0xFFFFFF / ITERATIONS));
-			pixel_put(x, y, data->img, colour);
+			colour = (i + 1 - log2(log2(fabs(z.re * z.re + z.im * z.im))));
+			pixel_put(x, y, data->img, 0x000000 + colour * (0x999999 / ITERATIONS));
 			return ;
 		}
 		square_complex(&z);
@@ -37,7 +37,7 @@ void	mandelbrot(t_fractol *data, int x, int y)
 		z.im = z.im + c.im;
 		i ++;
 	}
-	pixel_put(x, y, data->img, PSY_MAGENTA);
+	pixel_put(x, y, data->img, PSY_WHITE);
 }
 
 void	render(t_fractol *data)
