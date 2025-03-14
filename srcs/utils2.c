@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:30:21 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/12 16:21:17 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:29:53 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ double	ft_atod(const char *nptr)
 {
 	int		i;
 	int		sign;
-	double  total;
-	double		power;
+	double	total;
+	double	power;
 
 	i = 0;
 	sign = 1;

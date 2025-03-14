@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 12:37:21 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:31:03 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,18 @@ int	main(int ac, char *av[])
 	data.img = &img;
 	data.c = &c;
 	if (ft_strncmp(av[1], "mandelbrot", 10) == 0 && ac == 2)
-	{
-		fractol_init(&data);
 		data.type = MANDELBROT;
-	}
 	else if (ft_strncmp(av[1], "julia", 5) == 0 && ac == 4)
 	{
-		fractol_init(&data);
 		data.type = JULIA;
 		c.re = ft_atod(av[2]);
 		c.im = ft_atod(av[3]);
 	}
 	else if (ft_strncmp(av[1], "b", 1) == 0 && ac == 2)
-	{
-		fractol_init(&data);
 		data.type = BURNING_SHIP;
-	}
 	else
 		exit(1);
+	fractol_init(&data);
 	render(&data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, input, &data);
 	mlx_mouse_hook(data.win, scroll_with_cursor, &data);

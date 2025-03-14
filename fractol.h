@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 11:39:56 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:04:13 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_complex
 	double	im;
 }	t_complex;
 
-
 typedef struct s_fractol
 {
 	void		*mlx;
@@ -84,6 +83,7 @@ void	render(t_fractol *data);
 // julia.c
 int		input(int keysym, t_fractol *data);
 int		scroll_with_cursor(int keysym, int x, int y, t_fractol *data);
+void	julia(t_fractol *data, int x, int y);
 
 // burning_ship.c
 void	burning_ship(t_fractol *data, int x, int y);
@@ -93,6 +93,7 @@ double	scale(double u, double new_min, double new_max, double old_max);
 void	ft_quit(t_fractol *data);
 int		destrory(t_fractol *data);
 void	square_complex(t_complex *z);
+void	pixel_put(int x, int y, t_img *img, int colour);
 
 // utils2.c
 double	ft_atod(const char *nptr);
@@ -100,7 +101,5 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // fractol.c
 void	fractol_init(t_fractol *data);
-void	pixel_put(int x, int y, t_img *img, int colour);
-void	julia(t_fractol *data, int x, int y);
 
 #endif
