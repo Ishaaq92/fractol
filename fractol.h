@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 14:04:13 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 15:24:08 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@
 # define PSY_WHITE      0xFFFFFF  // Pure White
 # define PSY_BLACK      0x000000  // Deep Black
 
+
+enum e_pal
+{
+	red,
+	green,
+	blue
+};
+
 enum e_type
 {
 	MANDELBROT,
@@ -74,6 +82,7 @@ typedef struct s_fractol
 	double		zoom;
 	double		x_shift;
 	double		y_shift;
+	enum e_pal	pallette;
 }	t_fractol;
 
 // mandelbrot.c
@@ -100,6 +109,10 @@ double	ft_atod(const char *nptr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // fractol.c
-void	fractol_init(t_fractol *data);
+void	fractol_init(t_fractol *data, double re, double im);
+
+// colours.c
+int		set_colour(t_fractol *data);
+int		generate_color(double t);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:30:21 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 13:29:53 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/14 14:45:10 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ int	input(int keysym, t_fractol *data)
 		data->y_shift += (data->zoom / 2 * 0.35);
 	else if (keysym == XK_s || keysym == XK_Down)
 		data->y_shift -= (data->zoom / 2 * 0.35);
+	else if (keysym == XK_1)
+		data->pallette = red;
+	else if (keysym == XK_2)
+		data->pallette = blue;
+	else if (keysym == XK_3)
+		data->pallette = green;
 	render(data);
 	return (0);
 }
