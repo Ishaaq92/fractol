@@ -6,7 +6,7 @@
 #    By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 16:42:19 by isahmed           #+#    #+#              #
-#    Updated: 2025/03/19 13:27:04 by isahmed          ###   ########.fr        #
+#    Updated: 2025/03/19 14:00:18 by isahmed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SDIR = srcs
 VPATH = $(SDIR)
 
 BINARY = fractol
-CFILES = mandelbrot.c julia.c fractol.c utils.c utils2.c burning_ship.c
+CFILES = mandelbrot.c julia.c fractol.c utils.c utils2.c burning_ship.c key_bindings.c
 OBJECTS = $(CFILES:%.c=$(ODIR)/%.o)
 OBJS := $(patsubst %.c,$(ODIR)/%.o, $(CFILES))
 FT_PRINTF = ft_printf/libftprintf.a

@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 13:54:34 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 14:00:18 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,38 +63,6 @@ void	render(t_fractol *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
 
-void	display_info(void)
-{
-	ft_printf("Run './fractol'\n\n");
-	ft_printf("Followed by one of:\n");
-	ft_printf(" - 'mandelbrot'\n");
-	ft_printf(" - 'julia <double1> <double2>'\n");
-	ft_printf(" - 'burning'\n\n");
-	ft_printf("Examples:\n");
-	ft_printf("./fractol mandelbrot\n");
-	ft_printf("./fractol julia -0.5 0.5\n");
-	ft_printf("./fractol burning\n");
-	exit(1);
-}
-
-void	instructions(void)
-{
-	ft_printf("Controls & Bindings\n\n");
-	ft_printf("Switching Colours:\n");
-	ft_printf("1	- RED\n");
-	ft_printf("2	- GREEN\n");
-	ft_printf("3	- BLUE\n");
-	ft_printf("\n");
-	ft_printf("Shifting:\n");
-	ft_printf("w	- UP\n");
-	ft_printf("a	- LEFT\n");
-	ft_printf("s	- DOWN\n");
-	ft_printf("d	- RIGHT\n");
-	ft_printf("\n");
-	ft_printf("Adjust Iterations:\n");
-	ft_printf(".	- INCREASE\n");
-	ft_printf(",	- DECREASE");
-}
 
 int	main(int ac, char *av[])
 {

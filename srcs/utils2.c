@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:30:21 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 12:35:19 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:59:22 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,51 +56,35 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	scroll_with_cursor(int keysym, int x, int y, t_fractol *data)
+void	display_info(void)
 {
-	double	mouse_re;
-	double	mouse_im;
-
-	mouse_re = scale(x, -2, 2, WIDTH - 1) * data->zoom + data->x_shift;
-	mouse_im = scale(y, 2, -2, HEIGHT - 1) * data->zoom + data->y_shift;
-	if (keysym == 4)
-	{
-		data->x_shift = mouse_re + (data->x_shift - mouse_re) * 0.9;
-		data->y_shift = mouse_im + (data->y_shift - mouse_im) * 0.9;
-		data->zoom *= 0.9;
-	}
-	if (keysym == 5)
-	{
-		data->x_shift = mouse_re + (data->x_shift - mouse_re) / 0.9;
-		data->y_shift = mouse_im + (data->y_shift - mouse_im) / 0.9;
-		data->zoom /= 0.9;
-	}
-	render(data);
-	return (0);
+	ft_printf("Run './fractol'\n\n");
+	ft_printf("Followed by one of:\n");
+	ft_printf(" - 'mandelbrot'\n");
+	ft_printf(" - 'julia <double1> <double2>'\n");
+	ft_printf(" - 'burning'\n\n");
+	ft_printf("Examples:\n");
+	ft_printf("./fractol mandelbrot\n");
+	ft_printf("./fractol julia -0.5 0.5\n");
+	ft_printf("./fractol burning\n");
+	exit(1);
 }
 
-int	input(int keysym, t_fractol *data)
+void	instructions(void)
 {
-	if (keysym == XK_Escape)
-		ft_quit(data);
-	else if (keysym == XK_a || keysym == XK_Left)
-		data->x_shift -= (data->zoom / 2 * 0.35);
-	else if (keysym == XK_d || keysym == XK_Right)
-		data->x_shift += (data->zoom / 2 * 0.35);
-	else if (keysym == XK_w || keysym == XK_Up)
-		data->y_shift += (data->zoom / 2 * 0.35);
-	else if (keysym == XK_s || keysym == XK_Down)
-		data->y_shift -= (data->zoom / 2 * 0.35);
-	else if (keysym == XK_1)
-		data->pallette = RED;
-	else if (keysym == XK_2)
-		data->pallette = BLUE;
-	else if (keysym == XK_3)
-		data->pallette = GREEN;
-	else if (keysym == XK_period)
-		data->iterations += 5;
-	else if (keysym == XK_comma)
-		data->iterations -= 5;
-	render(data);
-	return (0);
+	ft_printf("Controls & Bindings\n\n");
+	ft_printf("Switching Colours:\n");
+	ft_printf("1	- RED\n");
+	ft_printf("2	- GREEN\n");
+	ft_printf("3	- BLUE\n");
+	ft_printf("\n");
+	ft_printf("Shifting:\n");
+	ft_printf("w	- UP\n");
+	ft_printf("a	- LEFT\n");
+	ft_printf("s	- DOWN\n");
+	ft_printf("d	- RIGHT\n");
+	ft_printf("\n");
+	ft_printf("Adjust Iterations:\n");
+	ft_printf(".	- INCREASE\n");
+	ft_printf(",	- DECREASE");
 }

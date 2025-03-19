@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 13:29:06 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 14:02:03 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,22 @@ typedef struct s_fractol
 	int			iterations;
 }	t_fractol;
 
-// mandelbrot.c
-void	mandelbrot(t_fractol *data, int x, int y);
+// fractol.c
+void	fractol_init(t_fractol *data, double re, double im);
 void	render(t_fractol *data);
 
+// mandelbrot.c
+void	mandelbrot(t_fractol *data, int x, int y);
+
 // julia.c
-int		input(int keysym, t_fractol *data);
-int		scroll_with_cursor(int keysym, int x, int y, t_fractol *data);
 void	julia(t_fractol *data, int x, int y);
 
 // burning_ship.c
 void	burning_ship(t_fractol *data, int x, int y);
+
+// key_bindings.c
+int		input(int keysym, t_fractol *data);
+int		scroll_with_cursor(int keysym, int x, int y, t_fractol *data);
 
 // utils.c
 double	scale(double u, double new_min, double new_max, double old_max);
@@ -107,8 +112,7 @@ void	pixel_put(int x, int y, t_img *img, int colour);
 // utils2.c
 double	ft_atod(const char *nptr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-// fractol.c
-void	fractol_init(t_fractol *data, double re, double im);
+void	display_info(void);
+void	instructions(void);
 
 #endif
