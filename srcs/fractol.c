@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 15:23:37 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 11:47:04 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,31 @@ void	fractol_init(t_fractol *data, double re, double im)
 	data->c->re = re;
 	data->c->im = im;
 	data->pallette = blue;
+	data->iterations = 75;
+}
+
+void	render(t_fractol *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (data->type == MANDELBROT)
+				mandelbrot(data, x, y);
+			else if (data->type == JULIA)
+				julia(data, x, y);
+			else if (data->type == BURNING_SHIP)
+				burning_ship(data, x, y);
+			x ++;
+		}
+		y ++;
+	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
 
 int	main(int ac, char *av[])
@@ -50,7 +75,7 @@ int	main(int ac, char *av[])
 		data.type = MANDELBROT;
 	else if (ft_strncmp(av[1], "julia", 5) == 0 && ac == 4)
 		data.type = JULIA;
-	else if (ft_strncmp(av[1], "b", 1) == 0 && ac == 2)
+	else if (ft_strncmp(av[1], "burning", 1) == 0 && ac == 2)
 		data.type = BURNING_SHIP;
 	else
 		exit(1);

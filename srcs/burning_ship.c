@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:23:30 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 15:26:01 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 11:50:32 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ void	burning_ship(t_fractol *data, int x, int y)
 	t_complex	z;
 	int			i;
 	int			colour;
-	double		smooth_i;
 
 	data->c->re = scale(x, -2, 2, WIDTH) * data->zoom + data->x_shift;
 	data->c->im = scale(y, -2, 2, HEIGHT) * data->zoom - data->y_shift;
 	z.re = 0;
 	z.im = 0;
 	i = -1;
-	while (++i < ITERATIONS)
+	while (++i < data->iterations)
 	{
 		if ((z.re * z.re) + (z.im * z.im) > 4)
 		{
-			smooth_i = i + 1 - log2(log2(fabs(z.re * z.im)));
-			colour = generate_color(smooth_i / ITERATIONS);
+			colour = scale(log(1 + i), PSY_BLACK, data->pallette,
+					log(data->iterations + 1));
 			pixel_put(x, y, data->img, colour);
 			return ;
 		}
@@ -39,5 +38,5 @@ void	burning_ship(t_fractol *data, int x, int y)
 		z.re += data->c->re;
 		z.im += data->c->im;
 	}
-	pixel_put(x, y, data->img, PSY_BLACK);
+	pixel_put(x, y, data->img, data->pallette);
 }

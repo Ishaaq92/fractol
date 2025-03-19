@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:30:21 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 14:45:10 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 12:02:20 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ int	input(int keysym, t_fractol *data)
 		data->pallette = blue;
 	else if (keysym == XK_3)
 		data->pallette = green;
+	else if (keysym == XK_period)
+		data->iterations += 5;
+	else if (keysym == XK_comma)
+		data->iterations -= 5;
 	render(data);
 	return (0);
 }
