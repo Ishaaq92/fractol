@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 12:35:19 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:29:06 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <stdio.h>
+# include "ft_printf/ft_printf.h"
 
 # define WIDTH 800
 # define HEIGHT 800
