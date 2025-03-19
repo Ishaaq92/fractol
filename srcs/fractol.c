@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 11:47:04 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 12:35:19 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fractol_init(t_fractol *data, double re, double im)
 	data->y_shift = 0.0;
 	data->c->re = re;
 	data->c->im = im;
-	data->pallette = blue;
+	data->pallette = BLUE;
 	data->iterations = 75;
 }
 

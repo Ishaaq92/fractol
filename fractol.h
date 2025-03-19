@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:44:56 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 11:52:37 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/19 12:35:19 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@
 
 enum e_pal
 {
-	red = 0x0000ff,
-	green = 0x00ff00,
-	blue = 0xff0000
+	RED = 0xff0000,
+	GREEN = 0x00ff00,
+	BLUE = 0x0000ff
 };
 
 enum e_type
