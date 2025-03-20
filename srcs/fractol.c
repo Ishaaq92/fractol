@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:05:53 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/19 14:00:18 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:08:30 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,17 @@ void	render(t_fractol *data)
 		while (x < WIDTH)
 		{
 			if (data->type == MANDELBROT)
-				mandelbrot(data, x, y);
+				mandelbrot(data, x * 17 % WIDTH, y * 17 % HEIGHT);
 			else if (data->type == JULIA)
-				julia(data, x, y);
+				julia(data, x * 17 % WIDTH, y * 17 % HEIGHT);
 			else if (data->type == BURNING_SHIP)
-				burning_ship(data, x, y);
+				burning_ship(data, x * 17 % WIDTH, y * 17 % HEIGHT);
 			x ++;
 		}
 		y ++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img->img, 0, 0);
 }
-
 
 int	main(int ac, char *av[])
 {

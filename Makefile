@@ -6,7 +6,7 @@
 #    By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/18 16:42:19 by isahmed           #+#    #+#              #
-#    Updated: 2025/03/19 14:00:18 by isahmed          ###   ########.fr        #
+#    Updated: 2025/03/20 14:13:04 by isahmed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SDIR = srcs
 VPATH = $(SDIR)
 
 BINARY = fractol
+BONUS = bonus
 CFILES = mandelbrot.c julia.c fractol.c utils.c utils2.c burning_ship.c key_bindings.c
 OBJECTS = $(CFILES:%.c=$(ODIR)/%.o)
 OBJS := $(patsubst %.c,$(ODIR)/%.o, $(CFILES))
@@ -37,6 +38,8 @@ $(ODIR)/%.o: %.c | $(DIRS)
 	$(CC) $(CFLAGS) -c $< -o $@
 $(FT_PRINTF):
 	@make --no-print-directory -C ft_printf
+
+bonus: all
 
 clean:
 	rm -rf $(ODIR)

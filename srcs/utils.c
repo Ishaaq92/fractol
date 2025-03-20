@@ -6,7 +6,7 @@
 /*   By: isahmed <isahmed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:19:35 by isahmed           #+#    #+#             */
-/*   Updated: 2025/03/14 13:29:08 by isahmed          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:45:19 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_quit(t_fractol *data)
 {
+	mlx_destroy_image(data->mlx, data->img->img);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
